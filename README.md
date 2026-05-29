@@ -62,18 +62,6 @@ CUDA_VISIBLE_DEVICES=1 python -m vllm.entrypoints.openai.api_server \
   --max-model-len 60000
 ```
 
-## Quick Start
-
-Once all services are running, configure API keys and initialize the agent:
-
-```python
-from Agent.agent import CiteAgent
-
-agent = CiteAgent(
-    s2_api_keys=["key1", "key2"],
-    device="cuda"
-)
-```
 
 ## File Structure
 
