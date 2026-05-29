@@ -1,6 +1,4 @@
-# ReCite
-
-A multi-component system for intelligent citation localization and query planning in scholarly document retrieval.
+# ReCite: Agentic Reasoning for Faithful Citation
 
 ## Overview
 
