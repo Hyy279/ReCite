@@ -1,0 +1,11 @@
+torch>=2.0.0
+transformers>=4.30.0
+datasets>=2.10.0
+modelscope>=1.8.0
+accelerate>=0.20.0
+bitsandbytes>=0.40.0
+openai>=1.0.0
+requests>=2.31.0
+tqdm>=4.65.0
+pydantic>=2.0.0
+peft>=0.4.0
