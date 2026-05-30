@@ -10,7 +10,7 @@ from agent import CiteAgent
 # =======================================================
 # Configuration Section
 # =======================================================
-TEST_FILE = "test_200.jsonl" 
+TEST_FILE = "test_MasterBrain.jsonl" 
 RESULT_FILE = "evaluation_results.jsonl"
 
 # Insert your Semantic Scholar API Keys here
