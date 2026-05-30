@@ -20,7 +20,7 @@ S2_KEYS = [
     "YOUR_S2_API_KEY_2"
 ]
 
-FILE_TEST = "test_200.jsonl"           # File containing the original text
+FILE_TEST = "test_MasterBrain.jsonl"           # File containing the original text
 FILE_PRED = "eval_results.jsonl"     # File containing predictions and ground truth
 FILE_OUTPUT = "lenient_evaluation_results.jsonl"        # Path to save evaluation results
 
