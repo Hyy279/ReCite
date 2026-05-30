@@ -90,7 +90,3 @@ CUDA_VISIBLE_DEVICES=1 python -m vllm.entrypoints.openai.api_server \
 ## Requirements
 
 See `requirements.txt` for dependencies.
-
-## License
-
-Please refer to the project documentation for licensing information.
