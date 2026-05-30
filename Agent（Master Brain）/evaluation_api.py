@@ -51,25 +51,25 @@ class BaselineCiteAgent:
         print(f"\n[*] Initializing Baseline LLM (Engine: {provider.upper()})...")
         
         if provider == "deepseek":
-            self.client = OpenAI(api_key=llm_api_key, base_url="https://api.deepseek.com")
+            self.client = OpenAI(api_key=llm_api_key, base_url="url")
             self.model_name = "deepseek-v4-flash"
         elif provider == "qwen":
-            self.client = OpenAI(api_key=llm_api_key, base_url="https://dashscope.aliyuncs.com/compatible-mode/v1")
+            self.client = OpenAI(api_key=llm_api_key, base_url="url")
             self.model_name = "qwen3.6-27b"
         elif provider == "qwen3.6-plus":
-            self.client = OpenAI(api_key=llm_api_key, base_url="https://dashscope.aliyuncs.com/compatible-mode/v1")
+            self.client = OpenAI(api_key=llm_api_key, base_url="url")
             self.model_name = "qwen3.6-plus"
         elif provider == "zhipu":
-            self.client = OpenAI(api_key=llm_api_key, base_url="https://open.bigmodel.cn/api/paas/v4/")
+            self.client = OpenAI(api_key=llm_api_key, base_url="url")
             self.model_name = "glm-4-plus"
         elif provider == "mimo":
-            self.client = OpenAI(api_key=llm_api_key, base_url="https://token-plan-cn.xiaomimimo.com/v1")
+            self.client = OpenAI(api_key=llm_api_key, base_url="url")
             self.model_name = "mimo-v2.5-pro"
         elif provider == "kimi":
-            self.client = OpenAI(api_key=llm_api_key, base_url="https://api.moonshot.cn/v1")
+            self.client = OpenAI(api_key=llm_api_key, base_url="url")
             self.model_name = "kimi-k2-0905-preview"
         elif provider == "gpt-5.1-chat":
-            self.client = OpenAI(api_key=llm_api_key, base_url="https://api.gptsapi.net/v1")
+            self.client = OpenAI(api_key=llm_api_key, base_url="url")
             self.model_name = "gpt-5.1-chat"
         else:
             raise ValueError("Provider must be a supported model.")
