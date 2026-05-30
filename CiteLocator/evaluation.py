@@ -27,12 +27,12 @@ CONFIG = {
         "minimax": "YOUR_MINIMAX_API_KEY"
     },
     "BASE_URLS": {
-        "deepseek": "https://api.deepseek.com",
-        "qwen_api": "https://dashscope.aliyuncs.com/compatible-mode/v1",
-        "openai": "https://api.gptsapi.net/v1",
-        "zhipu": "https://open.bigmodel.cn/api/paas/v4/",
-        "moonshot": "https://api.moonshot.cn/v1",
-        "minimax": "https://api.minimax.chat/v1"
+        "deepseek": "url",
+        "qwen_api": "url",
+        "openai": "url",
+        "zhipu": "url",
+        "moonshot": "url",
+        "minimax": "url"
     }
 }
 
