@@ -90,7 +90,7 @@ class BaselineCiteAgent:
 
     def _call_semantic_scholar_api(self, query, max_retries=3):
         url = "https://api.semanticscholar.org/graph/v1/paper/search"
-        params = {"query": query, "limit": 12, "fields": "paperId,title,authors,tldr,citationCount,citationStyles"}
+        params = {"query": query, "limit": 8, "fields": "paperId,title,authors,tldr,citationCount,citationStyles"}
 
         for attempt in range(max_retries):
             try:
@@ -218,8 +218,8 @@ class BaselineCiteAgent:
         return final_article, global_bibliography
 
 # ================= Configuration Section =================
-TEST_FILE = "retest/test_200.jsonl"
-RESULT_FILE = "retest/eval_results_v4flash_limit12.jsonl"
+TEST_FILE = "test_MasterBrain.jsonl"
+RESULT_FILE = "baseline_evaluation_results.jsonl"
 
 # Insert your Semantic Scholar API Keys here
 S2_KEYS = [
