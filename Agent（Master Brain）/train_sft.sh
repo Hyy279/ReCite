@@ -7,7 +7,7 @@ export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 export WANDB_MODE=offline 
 
 # Define directories and file paths (anonymized)
-BASE_DIR="/path/to/your_project_dir/Agent"
+BASE_DIR="/path/to/your_project_dir"
 MODEL_PATH="/path/to/your_model_weights"
 DATA_PATH="$BASE_DIR/train.parquet"
 OUTPUT_DIR="$BASE_DIR/ReCite_qwen3_4b_sft"
