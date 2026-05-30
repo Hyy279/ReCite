@@ -253,7 +253,7 @@ if __name__ == "__main__":
     parser.add_argument("--limit", type=int, default=None)
     args = parser.parse_args()
 
-    data_path = "citeagent_test_set_refined_cleaned1.json"
+    data_path = "test_CiteLocator.json"
     if not os.path.exists(data_path):
         data_path = os.path.join(os.path.dirname(__file__), "..", data_path)
 
