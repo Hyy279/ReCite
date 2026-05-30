@@ -48,7 +48,7 @@ class CiteAgent:
         print("\n[*] Connecting to Tool 2 (GRPO Intent Engine)...")
         self.intent_worker = CiteModelWorkers(port=8002, model_name="tool2")
         
-        print("\n[🧠] Connecting to Brain (Qwen Instruct)...")
+        print("\n[*] Connecting to Brain (Qwen Instruct)...")
         self.brain_worker = CiteModelWorkers(port=8003, model_name="brain")
 
         # =======================================================
@@ -141,7 +141,7 @@ class CiteAgent:
                     return response.json().get('data', [])
                 elif response.status_code == 429:
                     wait_time = 2 ** (attempt + 1)
-                    print(f"  ⚠️ API Rate Limit (429) triggered, retrying in {wait_time}s [{attempt+1}/{max_retries}]...")
+                    print(f"   API Rate Limit (429) triggered, retrying in {wait_time}s [{attempt+1}/{max_retries}]...")
                     time.sleep(wait_time)
                     continue
                 else:
@@ -297,7 +297,7 @@ Example:
                         current_marked_text = obs
                         # print(f"       Success: SFT marking completed.")
                         if "[#CITE#]" not in obs:
-                            # print("      ℹ️ Info: No citation required, terminating early.")
+                            # print("       Info: No citation required, terminating early.")
                             return {"marked_text": chunk_text, "citations": {}}
                         messages.append({"role": "user", "content": f"Result from mark_citations:\n{obs}"})
                         
