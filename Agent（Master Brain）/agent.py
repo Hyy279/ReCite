@@ -38,7 +38,7 @@ class S2RateLimiter:
 
 class CiteAgent:
     # s2_api_keys accepts a list of keys
-    def __init__(self, agent_model_path=None, tool1_model_path=None, tool2_model_path=None, device=None, s2_api_keys=None):
+    def __init__(self, Master_Brain_path=None, CiteLocator_path=None, QueryPlanner_path=None, device=None, s2_api_keys=None):
         self.s2_limiter = S2RateLimiter(s2_api_keys or [])
         self.search_cache = {}  
 
