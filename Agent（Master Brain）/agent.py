@@ -43,13 +43,13 @@ class CiteAgent:
         self.search_cache = {}  
 
         print("\n[*] Connecting to Tool 1 (SFT Marking Engine)...")
-        self.locator_worker = CiteModelWorkers(port=8001, model_name="tool1")
+        self.locator_worker = CiteModelWorkers(port=8001, model_name="CiteLocator")
         
         print("\n[*] Connecting to Tool 2 (GRPO Intent Engine)...")
-        self.intent_worker = CiteModelWorkers(port=8002, model_name="tool2")
+        self.intent_worker = CiteModelWorkers(port=8002, model_name="QueryPlanner")
         
         print("\n[*] Connecting to Brain (Qwen Instruct)...")
-        self.brain_worker = CiteModelWorkers(port=8003, model_name="brain")
+        self.brain_worker = CiteModelWorkers(port=8003, model_name="MasterBrain")
 
         # =======================================================
         # 1. Strict Tool JSON Schema
