@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description"
+    content="ReCite: Agentic Reasoning for Faithful Citation. Findings of EMNLP 2026.">
+  <title>ReCite &mdash; Agentic Reasoning for Faithful Citation</title>
+  <link rel="icon" href="data:,">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <script>document.documentElement.classList.add("js");</script>
+</head>
+<body>
+
+<nav class="topnav">
+  <div class="container topnav-inner">
+    <button class="menu-toggle" id="menu-toggle" type="button"
+      aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+        <path d="M2.5 4.5h13M2.5 9h13M2.5 13.5h13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+      </svg>
+    </button>
+    <ul class="topnav-links" id="nav-links">
+      <li><a href="#motivation">Motivation</a></li>
+      <li><a href="#abstract">Abstract</a></li>
+      <li><a href="#method">Method</a></li>
+      <li><a href="#data">Data</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#evaluation">Evaluation</a></li>
+      <li><a href="#citation">Citation</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="scroll-progress" id="scroll-progress"></div>
+
+<!-- ================= HERO ================= -->
+<header class="hero" id="top">
+  <div class="hero-orbs" aria-hidden="true">
+    <span class="orb orb-a"></span>
+    <span class="orb orb-b"></span>
+    <span class="orb orb-c"></span>
+  </div>
+  <div class="container">
+    <p class="eyebrow" aria-label="Acceptance venue">
+      <span class="eyebrow-line" aria-hidden="true"></span>
+      Findings of EMNLP 2026
+      <span class="eyebrow-line" aria-hidden="true"></span>
+    </p>
+    <h1>ReCite</h1>
+    <p class="subtitle">Agentic Reasoning for Faithful Citation</p>
+    <p class="hero-statement">Similarity can retrieve a real paper &mdash; but a citation must <em>prove the claim</em>.</p>
+
+    <p class="authors">
+      Yuyang Huang<sup>1</sup>&ensp;&middot;&ensp;
+      <a href="https://www.libobo.site/" target="_blank" rel="noopener">Bobo Li</a><sup>2&ast;</sup>&ensp;&middot;&ensp;
+      Jiajia Song<sup>2</sup>&ensp;&middot;&ensp;
+      Yuzhe Ding<sup>1</sup>&ensp;&middot;&ensp;
+      Chong Teng<sup>1</sup>&ensp;&middot;&ensp;
+      Fei Li<sup>1</sup>&ensp;&middot;&ensp;
+      Donghong Ji<sup>1&ast;</sup>
+    </p>
+    <p class="affiliation"><sup>1</sup>Wuhan University &nbsp;&middot;&nbsp; <sup>2</sup>National University of Singapore</p>
+    <p class="contact">
+      <a href="mailto:hyy279@whu.edu.cn">hyy279@whu.edu.cn</a>
+      &nbsp;&middot;&nbsp;
+      <a href="mailto:libobo@nus.edu.sg">libobo@nus.edu.sg</a>
+      &nbsp;&middot;&nbsp;
+      <a href="mailto:dhji@whu.edu.cn">dhji@whu.edu.cn</a>
+    </p>
+
+    <div class="hero-buttons">
+      <a class="btn btn-paper" href="ReCite.pdf" target="_blank" rel="noopener">
+        <svg width="14" height="16" viewBox="0 0 14 16" fill="none" aria-hidden="true"><path d="M2 1h6l4 4v10H2V1Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M8 1v4h4M4.5 11h5M4.5 13.5h3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        Paper PDF
+      </a>
+      <a class="btn btn-code" href="https://github.com/Hyy279/ReCite" target="_blank" rel="noopener">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38l-.01-1.36c-2.23.48-2.7-1.07-2.7-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.8.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.67.07-.52.28-.87.51-1.07-1.78-.2-3.65-.89-3.65-3.97 0-.88.31-1.6.83-2.16-.08-.2-.36-1.02.08-2.12 0 0 .67-.22 2.2.82a7.6 7.6 0 0 1 4 0c1.52-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.16 0 3.09-1.87 3.77-3.66 3.96.29.25.55.74.55 1.49l-.01 2.21c0 .21.14.46.55.38A8 8 0 0 0 8 0Z"/></svg>
+        Code
+      </a>
+      <a class="btn btn-bib" href="#citation">
+        <svg width="14" height="16" viewBox="0 0 14 16" fill="none" aria-hidden="true"><path d="M2 2h10v12l-1.5-1.1L9 14l-2-1.1L5 14l-1.5-1.1L2 14V2Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/><path d="M5 6h4M5 8.2h3" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        BibTeX
+      </a>
+    </div>
+  </div>
+</header>
+
+<!-- ================= MOTIVATION ================= -->
+<section class="section" id="motivation">
+  <div class="container">
+    <div class="motivation editorial-grid">
+      <div class="motivation-copy">
+        <p class="section-kicker">Motivation</p>
+        <h2 class="section-title">Similarity is not support</h2>
+        <p class="section-lead" style="margin-bottom:8px">
+          Topical relevance can point to an authentic paper that still fails to logically support the author&rsquo;s
+          claim. ReCite starts from the question: <em>what does a citation actually need to prove?</em>
+        </p>
+        <ul class="finding-list">
+          <li>
+            <b>Context determines evidence</b>
+            <span>Background, comparison, and critique citations demand different verification criteria.</span>
+          </li>
+          <li>
+            <b>Intent should shape retrieval</b>
+            <span>Keywords conditioned on citation intent outperform surface-level semantic matching.</span>
+          </li>
+          <li>
+            <b>Errors need a recovery loop</b>
+            <span>A single faulty retrieval should trigger reflection, not propagate downstream.</span>
+          </li>
+        </ul>
+        <div class="tag-row">
+          <span class="soft-tag">Authentic databases only</span>
+          <span class="soft-tag">Strict F1 39.15%</span>
+        </div>
+      </div>
+      <figure class="motivation-figure">
+        <img src="assets/figures/fig1.png" alt="Similarity-based retrieval versus the ReCite reasoning loop">
+        <figcaption>
+          <b>Figure 1.</b> Similarity-based retrieval vs. ReCite&rsquo;s verification-and-reflection loop.
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABSTRACT ================= -->
+<section class="section" id="abstract">
+  <div class="container">
+    <div class="abstract-layout editorial-grid">
+      <aside class="abstract-aside">
+        <p class="section-kicker">Abstract</p>
+        <h3>Citation as verifiable reasoning</h3>
+        <p>
+          A lightweight agentic framework for faithful citation, accepted at Findings of EMNLP 2026.
+        </p>
+        <div class="abstract-chip-list">
+          <div class="abstract-chip"><span class="icon-dot chip-blue">L</span><span><b>Location</b><br/>where does this claim need evidence?</span></div>
+          <div class="abstract-chip"><span class="icon-dot chip-purple">I</span><span><b>Intent</b><br/>what kind of evidence is expected?</span></div>
+          <div class="abstract-chip"><span class="icon-dot chip-green">V</span><span><b>Verification</b><br/>does the candidate logically support it?</span></div>
+        </div>
+      </aside>
+      <div class="abstract-body">
+        <span class="tldr-tag">TL;DR</span>
+        <p class="abstract-text">
+          Citation requires <b class="hl">logical support, not merely textual similarity</b>. ReCite is a decoupled
+          agentic framework that locates citation positions, plans intent-aware retrieval queries, and reflectively
+          verifies whether each candidate supports the claim &mdash; re-retrieving when evidence is inconsistent. Built
+          on Qwen3-4B with SFT and GRPO, ReCite achieves a Strict F1 of <strong>39.15%</strong>, surpassing
+          substantially larger generative models and general-purpose agents.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= METHOD ================= -->
+<section class="section" id="method">
+  <div class="container">
+    <div class="section-head"><p class="section-kicker">Method</p></div>
+    <h2 class="section-title">A decoupled, closed-loop citation agent</h2>
+    <p class="section-lead">
+      ReCite turns citation into an observe&ndash;think&ndash;act workflow. Three specialized Qwen3-4B modules locate
+      citation breakpoints, plan retrieval keywords, and verify candidates with reflective re-retrieval.
+    </p>
+
+    <div class="figure-slot figure-slot--max-920">
+      <img src="assets/figures/fig4.png" alt="ReCite overall architecture">
+    </div>
+    <p class="fig-caption">
+      <span class="no">Figure 4.</span>
+      The decoupled ReCite architecture: CiteLocator, QueryPlanner, and Master Brain form an iterative loop of
+      perception, planning, retrieval, verification, and reflection.
+    </p>
+
+    <div class="module-grid">
+      <article class="module-card">
+        <div class="icon-box">01</div>
+        <div class="kicker">CiteLocator &middot; SFT</div>
+        <h3>Location perception</h3>
+        <p>Predicts citation positions and labels each logical breakpoint Mandatory or Optional.</p>
+        <div class="metric"><span>Overall F1</span><b>66.37%</b></div>
+      </article>
+      <article class="module-card">
+        <div class="icon-box">02</div>
+        <div class="kicker">QueryPlanner &middot; SFT + GRPO</div>
+        <h3>Intent-aware planning</h3>
+        <p>Infers citation intent and generates targeted retrieval keywords per citation position.</p>
+        <div class="metric"><span>Reasoning F1</span><b>57.81%</b></div>
+      </article>
+      <article class="module-card">
+        <div class="icon-box">03</div>
+        <div class="kicker">Master Brain &middot; SFT</div>
+        <h3>Verification &amp; reflection</h3>
+        <p>Orchestrates Semantic Scholar retrieval, verifies claim&ndash;evidence consistency, and re-queries on failure.</p>
+        <div class="metric"><span>Strict F1</span><b>39.15%</b></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DATA ================= -->
+<section class="section" id="data">
+  <div class="container">
+    <div class="section-head"><p class="section-kicker">Data</p></div>
+    <h2 class="section-title">Supervision for reasoning, not just retrieval</h2>
+    <p class="section-lead">
+      Built from 10,893 LaTeX papers at top CS venues (2024&ndash;2025), the corpus provides three aligned subsets for
+      location perception, intent reasoning, and reflective trajectories.
+    </p>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <span class="value">10,893</span>
+        <span class="label">LaTeX papers</span>
+        <span class="sublabel">ACL &middot; EMNLP &middot; CVPR &middot; ICCV &middot; NeurIPS</span>
+      </div>
+      <div class="stat-card">
+        <span class="value">93,403</span>
+        <span class="label">Citation labels</span>
+        <span class="sublabel">CAP-8 intent taxonomy</span>
+      </div>
+      <div class="stat-card">
+        <span class="value">31,118</span>
+        <span class="label">Location samples</span>
+        <span class="sublabel">28,006 train / 3,112 test</span>
+      </div>
+      <div class="stat-card">
+        <span class="value">2,000</span>
+        <span class="label">Trajectories</span>
+        <span class="sublabel">500 gold + 1,500 variants</span>
+      </div>
+    </div>
+
+    <div class="insight-media" style="margin-top:8px">
+      <figure class="insight-figure">
+        <div class="figure-slot figure-slot--max-360">
+          <img src="assets/figures/fig2.png" alt="Conference and citation intent distributions">
+        </div>
+        <figcaption class="fig-caption">
+          <span class="no">Figure 2.</span>
+          Venue and CAP-8 citation intent distributions of the ReCite corpus.
+        </figcaption>
+      </figure>
+      <aside class="insight-card">
+        <span class="insight-label">Read this as</span>
+        <h4>A dual-ring view of the corpus</h4>
+        <p>
+          The inner ring breaks down papers across the five CS venues, while the outer ring distributes citation labels
+          over the eight CAP-8 intents. Background citations dominate the intent ring; critique is the rarest category.
+        </p>
+        <ul class="insight-points">
+          <li><span class="dot"></span><span><b>93,403</b> citation labels across CAP-8 intents</span></li>
+          <li><span class="dot"></span><span><b>Inner ring</b> venue share &nbsp;&middot;&nbsp; <b>Outer ring</b> intent share</span></li>
+        </ul>
+      </aside>
+    </div>
+
+    <div class="figure-slot figure-slot--max-620" style="margin-top:42px">
+      <img src="assets/figures/fig3.png" alt="Reflective trajectory synthesis pipeline">
+    </div>
+    <p class="fig-caption">
+      <span class="no">Figure 3.</span>
+      Synthesized reflective trajectories teach the agent to diagnose retrieval drift and issue a refined secondary
+      query.
+    </p>
+    <div class="takeaway-note">
+      <b>Takeaway</b>
+      <span>Vague queries and real distractors are injected on purpose &mdash; the agent must explain, correct, and
+      re-query rather than memorize a single retrieval path.</span>
+    </div>
+
+    <div class="tables-duo" style="margin-top:64px">
+      <div class="table-block">
+        <div class="table-caption"><span class="no">Table 1.</span> Dataset comparison</div>
+        <p class="table-explain">
+          ReCite provides supervision beyond static context&ndash;reference pairs: it also records where citations
+          appear, why they are needed, and how the agent should recover when retrieval fails.
+        </p>
+        <div class="table-scroll">
+          <table class="paper-table">
+            <thead>
+              <tr>
+                <th class="head-col">Capability</th>
+                <th>RefSeer</th>
+                <th>S2ORC</th>
+                <th>ReCite</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Local context mapping</td><td class="check">&#10003;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+              <tr><td>Full-text structure</td><td class="cross">&#10007;</td><td class="check">&#10003;</td><td class="check">&#10003;</td></tr>
+              <tr><td>Location perception</td><td class="cross">&#10007;</td><td class="cross">&#10007;</td><td class="check">&#10003;</td></tr>
+              <tr><td>Intent reasoning</td><td class="cross">&#10007;</td><td class="cross">&#10007;</td><td class="check">&#10003;</td></tr>
+              <tr><td>Reflective trajectories</td><td class="cross">&#10007;</td><td class="cross">&#10007;</td><td class="check">&#10003;</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-insight">
+          <div class="table-insight-head">
+            <span class="table-insight-title">What ReCite adds</span>
+            <span class="table-insight-count">3 signals beyond context&rarr;reference</span>
+          </div>
+          <div class="table-insight-items">
+            <div class="table-insight-item">
+              <span class="step">01</span>
+              <div>
+                <b>Location</b>
+                <p>Where a citation is needed</p>
+              </div>
+            </div>
+            <div class="table-insight-item">
+              <span class="step">02</span>
+              <div>
+                <b>Intent</b>
+                <p>Why a particular work is cited</p>
+              </div>
+            </div>
+            <div class="table-insight-item">
+              <span class="step">03</span>
+              <div>
+                <b>Reflection</b>
+                <p>How to recover when retrieval drifts</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-block">
+        <div class="table-caption"><span class="no">Table 2.</span> CAP-8 citation intent taxonomy</div>
+        <p class="table-explain">
+          Each citation is annotated with one of eight intent categories, which drives QueryPlanner&rsquo;s
+          retrieval-keyword generation and the verification criteria of the Master Brain.
+        </p>
+        <div class="table-scroll">
+          <table class="paper-table" style="min-width:100%">
+            <thead>
+              <tr><th>Abbr.</th><th>Category</th><th class="wrap">Description</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>BG</td><td>Background</td><td class="wrap">Provides background knowledge or information for the research domain.</td></tr>
+              <tr><td>MG</td><td>Motivation &amp; Gap</td><td class="wrap">Highlights research motivations or identifies gaps in existing literature.</td></tr>
+              <tr><td>CMP</td><td>Comparison</td><td class="wrap">Compares the current work or other baselines with specific prior methods.</td></tr>
+              <tr><td>BS</td><td>Basis &amp; Support</td><td class="wrap">Provides theoretical foundations or concepts supporting the current study.</td></tr>
+              <tr><td>MTD</td><td>Method &amp; Data</td><td class="wrap">Refers to specific methods, algorithms, tools, or datasets utilized in the research.</td></tr>
+              <tr><td>VLD</td><td>Validation</td><td class="wrap">Provides empirical evidence, results, or evaluation metrics to validate claims.</td></tr>
+              <tr><td>EV</td><td>Evolution</td><td class="wrap">Describes the historical evolution or development of a methodology.</td></tr>
+              <tr><td>CRT</td><td>Critique</td><td class="wrap">Expresses critiques, conflicts, or opposing views regarding prior work.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RESULTS ================= -->
+<section class="section" id="results">
+  <div class="container">
+    <div class="section-head"><p class="section-kicker">Results</p></div>
+    <h2 class="section-title">Main results</h2>
+    <p class="section-lead">
+      Evaluated on 200 held-out paragraphs and 1,023 unseen target papers from 2023&ndash;2025 top-venue submissions.
+    </p>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <span class="value">39.15</span>
+        <span class="label">Strict F1 (%)</span>
+        <span class="sublabel">best among all methods</span>
+      </div>
+      <div class="stat-card">
+        <span class="value">55.14</span>
+        <span class="label">Lenient F1 (%)</span>
+        <span class="sublabel">logical alternatives found</span>
+      </div>
+      <div class="stat-card">
+        <span class="value">89.71</span>
+        <span class="label">Position-only F1 (%)</span>
+        <span class="sublabel">exact placement accuracy</span>
+      </div>
+      <div class="stat-card">
+        <span class="value">4B</span>
+        <span class="label">Model size</span>
+        <span class="sublabel">rivals 1.6T-scale baselines</span>
+      </div>
+    </div>
+
+    <div class="figure-slot figure-slot--max-820">
+      <img src="assets/figures/fig5.png" alt="Recall across CAP-8 intent categories">
+    </div>
+    <p class="fig-caption">
+      <span class="no">Figure 5.</span>
+      Recall across the CAP-8 citation intent categories.
+    </p>
+    <div class="takeaway-note">
+      <b>Takeaway</b>
+      <span>ReCite keeps higher recall than most baselines across intent categories, showing that explicit intent
+      supervision aligns retrieval with the author&rsquo;s motivation rather than surface overlap.</span>
+    </div>
+
+    <div class="table-block" style="margin-top:56px">
+      <div class="table-caption"><span class="no">Table 3.</span> End-to-end citation prediction</div>
+      <p class="table-explain">
+        End-to-end workflows are scored at three strictness levels: exact target match (Overall-Strictly), any
+        logically supportive alternative (Lenient), and citation position only. ReCite-SFT (CAP-8) achieves the best
+        Strict F1 even against 1.6T-scale generative baselines.
+      </p>
+      <div class="table-scroll">
+        <table class="paper-table">
+          <thead>
+            <tr>
+              <th rowspan="2" class="head-col">Method</th>
+              <th rowspan="2">Size</th>
+              <th colspan="3">Overall-Strictly</th>
+              <th colspan="3">Lenient Evaluation</th>
+              <th colspan="3">Position-Only</th>
+            </tr>
+            <tr>
+              <th>P&uarr;</th><th>R&uarr;</th><th>F1&uarr;</th>
+              <th>P&uarr;</th><th>R&uarr;</th><th>F1&uarr;</th>
+              <th>P&uarr;</th><th>R&uarr;</th><th>F1&uarr;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="group"><td colspan="11">Zero-shot prompt pipelines</td></tr>
+            <tr><td>GLM-4-Plus</td><td class="dim">&ndash;</td><td class="num">9.83</td><td class="num">10.27</td><td class="num">10.05</td><td class="num">17.22</td><td class="num">17.99</td><td class="num">17.60</td><td class="num">47.08</td><td class="num">49.19</td><td class="num">48.11</td></tr>
+            <tr><td>Mimo-V2.5-Pro</td><td class="dim">&ndash;</td><td class="num">26.40</td><td class="num">27.72</td><td class="num">27.04</td><td class="num">29.19</td><td class="num">30.63</td><td class="num">29.89</td><td class="num">75.07</td><td class="num">78.78</td><td class="num">76.88</td></tr>
+            <tr><td>GPT-4o-mini</td><td class="dim">&ndash;</td><td class="num">7.20</td><td class="num">8.65</td><td class="num">7.86</td><td class="num">12.73</td><td class="num">15.29</td><td class="num">13.89</td><td class="num">44.89</td><td class="num">53.90</td><td class="num">48.98</td></tr>
+            <tr><td>GPT-5.1-Chat</td><td class="dim">&ndash;</td><td class="num">8.99</td><td class="num">12.12</td><td class="num">10.32</td><td class="num">14.48</td><td class="num">19.54</td><td class="num">16.63</td><td class="num">35.32</td><td class="num">47.64</td><td class="num">40.57</td></tr>
+            <tr><td>Kimi-k2-preview</td><td class="dim">&ndash;</td><td class="num">19.06</td><td class="num">21.24</td><td class="num">20.09</td><td class="num">24.32</td><td class="num">27.10</td><td class="num">25.64</td><td class="num">55.86</td><td class="num">62.24</td><td class="num">58.88</td></tr>
+            <tr><td>Qwen3.6-Plus</td><td class="dim">&ndash;</td><td class="num">28.09</td><td class="num">35.44</td><td class="num">31.34</td><td class="num">31.09</td><td class="num">39.23</td><td class="num">34.69</td><td class="num">68.60</td><td class="num">86.50</td><td class="num">76.52</td></tr>
+            <tr><td>Qwen3.6-27B</td><td>27B</td><td class="num">22.89</td><td class="num">29.62</td><td class="num">25.83</td><td class="num">25.58</td><td class="num">33.08</td><td class="num">28.85</td><td class="num">62.34</td><td class="num">80.48</td><td class="num">70.26</td></tr>
+            <tr><td>DeepSeek-V4-Flash</td><td>284B</td><td class="num">31.23</td><td class="num">35.21</td><td class="num">33.10</td><td class="num">34.52</td><td class="num">38.89</td><td class="num">36.57</td><td class="num">72.95</td><td class="num">82.11</td><td class="num">77.26</td></tr>
+            <tr><td>DeepSeek-V4-Pro</td><td>1.6T</td><td class="num">31.29</td><td class="num">32.28</td><td class="num">31.77</td><td class="num">35.25</td><td class="num">36.34</td><td class="num">35.79</td><td class="num">75.97</td><td class="num">78.32</td><td class="num">77.13</td></tr>
+            <tr class="group"><td colspan="11">General agents (end-to-end via Mimo-V2.5-Pro)</td></tr>
+            <tr><td>Claude Code</td><td class="dim">&ndash;</td><td class="num">17.73</td><td class="num">27.26</td><td class="num">21.49</td><td class="num">21.35</td><td class="num">32.82</td><td class="num">25.87</td><td class="num">25.51</td><td class="num">39.23</td><td class="num">30.92</td></tr>
+            <tr><td>Hermes Agent</td><td class="dim">&ndash;</td><td class="num">22.39</td><td class="num">21.24</td><td class="num">21.80</td><td class="num">26.38</td><td class="num">25.02</td><td class="num">25.68</td><td class="num">28.01</td><td class="num">26.56</td><td class="num">27.27</td></tr>
+            <tr><td>OpenClaw</td><td class="dim">&ndash;</td><td class="num">18.09</td><td class="num">7.03</td><td class="num">10.12</td><td class="num">25.25</td><td class="num">9.81</td><td class="num">14.13</td><td class="num">29.42</td><td class="num">11.43</td><td class="num">16.46</td></tr>
+            <tr class="group"><td colspan="11">ReCite (Ours)</td></tr>
+            <tr class="ours"><td>ReCite-Base</td><td>4B</td><td class="num">36.92</td><td class="num">35.75</td><td class="num">36.33</td><td class="num">43.46</td><td class="num">42.08</td><td class="num">42.76</td><td class="num">89.80</td><td class="num">86.11</td><td class="num">87.53</td></tr>
+            <tr class="ours"><td>ReCite-SFT</td><td>4B</td><td class="num">37.48</td><td class="num">37.45</td><td class="num">37.47</td><td class="num">47.14</td><td class="num">47.07</td><td class="num">47.10</td><td class="num">89.80</td><td class="num best">89.66</td><td class="num best">89.73</td></tr>
+            <tr class="ours"><td>ReCite-SFT (CAP-8)</td><td>4B</td><td class="num best">39.22</td><td class="num best">39.07</td><td class="num best">39.15</td><td class="num best">55.27</td><td class="num best">55.02</td><td class="num best">55.14</td><td class="num best">89.92</td><td class="num">89.51</td><td class="num">89.71</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-note">
+        P / R / F1 scores (%). Bold blue marks the best value in each column; shaded rows are ReCite models. CAP-8 denotes
+        fine-tuning with citation taxonomy information.
+      </p>
+    </div>
+
+    <div class="figure-row">
+      <div>
+        <div class="figure-slot">
+          <img src="assets/figures/fig6.png" alt="Cross-venue robustness comparison">
+        </div>
+        <p class="fig-caption">
+          <span class="no">Figure 6.</span>
+          Cross-venue robustness across EMNLP, CVPR, ICCV, and NeurIPS test paragraphs.
+        </p>
+      </div>
+      <div>
+        <div class="figure-slot">
+          <img src="assets/figures/fig7.png" alt="F1 versus number of retrieved papers">
+        </div>
+        <p class="fig-caption">
+          <span class="no">Figure 7.</span>
+          Performance vs. the number of retrieved candidates. k = 8 balances evidence sufficiency and latency.
+        </p>
+      </div>
+    </div>
+    <div class="takeaway-note">
+      <b>Takeaway</b>
+      <span>Performance is stable across venues, and k = 8 provides the best evidence/latency trade-off &mdash; more
+      candidates add context noise rather than accuracy.</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MODULE EVALUATION ================= -->
+<section class="section" id="evaluation">
+  <div class="container">
+    <div class="section-head"><p class="section-kicker">Evaluation</p></div>
+    <h2 class="section-title">Module-level results and analysis</h2>
+    <p class="section-lead">
+      Each module is benchmarked separately against strong LLM and heuristic baselines, followed by a full ablation of
+      the decoupled design.
+    </p>
+
+    <div class="table-block">
+      <div class="table-caption"><span class="no">Table 4.</span> Citation location prediction (N = 3,112)</div>
+      <p class="table-explain">
+        CiteLocator must decide not only where a citation belongs, but whether it is Mandatory or Optional. It
+        outperforms every LLM baseline in Overall F1 and narrows the gap to human-level placement.
+      </p>
+      <div class="table-scroll">
+        <table class="paper-table">
+          <thead>
+            <tr>
+              <th rowspan="2" class="head-col">Model</th>
+              <th rowspan="2">Size</th>
+              <th rowspan="2">Strategy</th>
+              <th colspan="3">Mandatory</th>
+              <th colspan="3">Optional</th>
+              <th colspan="3">Overall</th>
+            </tr>
+            <tr>
+              <th>P&uarr;</th><th>R&uarr;</th><th>F1&uarr;</th>
+              <th>P&uarr;</th><th>R&uarr;</th><th>F1&uarr;</th>
+              <th>P&uarr;</th><th>R&uarr;</th><th>F1&uarr;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="group"><td colspan="11">Baseline models</td></tr>
+            <tr><td>GPT-5.1-Chat</td><td class="dim">&ndash;</td><td>Direct</td><td class="num">22.01</td><td class="num">59.72</td><td class="num">32.17</td><td class="num">9.21</td><td class="num">58.50</td><td class="num">15.92</td><td class="num">27.73</td><td class="num">59.39</td><td class="num">37.81</td></tr>
+            <tr><td>GPT-4o-mini</td><td class="dim">&ndash;</td><td>Direct</td><td class="num">24.62</td><td class="num">53.61</td><td class="num">33.75</td><td class="num">11.34</td><td class="num">57.17</td><td class="num">18.92</td><td class="num">31.25</td><td class="num">54.57</td><td class="num">39.74</td></tr>
+            <tr><td>Kimi-k2-preview</td><td class="dim">&ndash;</td><td>Direct</td><td class="num">31.27</td><td class="num">61.05</td><td class="num">41.36</td><td class="num">14.36</td><td class="num">61.28</td><td class="num">23.27</td><td class="num">38.38</td><td class="num">61.11</td><td class="num">47.15</td></tr>
+            <tr><td>MiniMax-M2.5</td><td class="dim">&ndash;</td><td>Direct</td><td class="num">33.52</td><td class="num">56.37</td><td class="num">42.04</td><td class="num">14.71</td><td class="num">52.52</td><td class="num">22.98</td><td class="num">40.35</td><td class="num">55.34</td><td class="num">46.67</td></tr>
+            <tr><td>GLM-4-flash</td><td class="dim">&ndash;</td><td>Direct</td><td class="num">25.81</td><td class="num">16.73</td><td class="num">20.30</td><td class="num">12.07</td><td class="num">17.96</td><td class="num">14.43</td><td class="num">32.67</td><td class="num">17.06</td><td class="num">22.41</td></tr>
+            <tr><td>Qwen3-Max</td><td class="dim">&ndash;</td><td>Direct</td><td class="num">32.87</td><td class="num">28.90</td><td class="num">30.75</td><td class="num">15.41</td><td class="num">29.28</td><td class="num">20.19</td><td class="num">40.18</td><td class="num">29.00</td><td class="num">33.69</td></tr>
+            <tr><td>Qwen3-Max</td><td class="dim">&ndash;</td><td>CoT</td><td class="num">34.43</td><td class="num">28.42</td><td class="num">31.14</td><td class="num">16.00</td><td class="num">28.09</td><td class="num">20.39</td><td class="num">41.71</td><td class="num">28.33</td><td class="num">33.74</td></tr>
+            <tr><td>DeepSeek-V3</td><td>671B</td><td>Direct</td><td class="num">30.91</td><td class="num">62.66</td><td class="num">41.40</td><td class="num">13.91</td><td class="num">61.65</td><td class="num">22.70</td><td class="num">37.85</td><td class="num">62.39</td><td class="num">47.12</td></tr>
+            <tr><td>DeepSeek-V3</td><td>671B</td><td>CoT</td><td class="num">29.23</td><td class="num">49.09</td><td class="num">36.64</td><td class="num">12.41</td><td class="num">45.88</td><td class="num">19.54</td><td class="num">35.68</td><td class="num">48.23</td><td class="num">41.02</td></tr>
+            <tr><td>Qwen3.5-27B</td><td>27B</td><td>Direct</td><td class="num">36.13</td><td class="num">55.86</td><td class="num">43.88</td><td class="num">15.83</td><td class="num">50.56</td><td class="num">24.11</td><td class="num">42.98</td><td class="num">54.44</td><td class="num">48.04</td></tr>
+            <tr><td>Qwen3-4B</td><td>4B</td><td>Direct</td><td class="num">13.98</td><td class="num">9.70</td><td class="num">11.45</td><td class="num">5.55</td><td class="num">9.56</td><td class="num">7.03</td><td class="num">18.12</td><td class="num">9.66</td><td class="num">12.60</td></tr>
+            <tr><td>Qwen3-4B</td><td>4B</td><td>CoT</td><td class="num">8.98</td><td class="num">3.99</td><td class="num">5.52</td><td class="num">2.59</td><td class="num">2.92</td><td class="num">2.74</td><td class="num">11.12</td><td class="num">3.70</td><td class="num">5.55</td></tr>
+            <tr class="group"><td colspan="11">ReCite</td></tr>
+            <tr class="ours"><td>CiteLocator</td><td>4B</td><td>Direct</td><td class="num best">67.93</td><td class="num best">60.61</td><td class="num best">64.06</td><td class="num best">42.90</td><td class="num">58.57</td><td class="num best">49.52</td><td class="num best">74.16</td><td class="num">60.06</td><td class="num best">66.37</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-note">
+        P / R / F1 scores (%). CiteLocator reports Precision, Recall, and F1 for Mandatory, Optional, and Overall
+        categories.
+      </p>
+    </div>
+
+    <div class="table-block" style="margin-top:28px">
+      <div class="table-caption"><span class="no">Table 5.</span> Intent-aware query planning (N = 300)</div>
+      <p class="table-explain">
+        QueryPlanner is evaluated on the quality of its reasoning trace and the keywords it extracts. GRPO lifts
+        reasoning F1 close to DeepSeek-V3&rsquo;s level while using only 4B parameters.
+      </p>
+      <div class="table-scroll">
+        <table class="paper-table">
+          <thead>
+            <tr>
+              <th rowspan="2" class="head-col">Model</th>
+              <th rowspan="2">Size</th>
+              <th colspan="2">Reasoning</th>
+              <th colspan="5">Keyword extraction</th>
+            </tr>
+            <tr>
+              <th>R-F1&uarr;</th><th>R-Jdg&uarr;</th>
+              <th>K-F1&uarr;</th><th>K-TR&uarr;</th><th>K-PR&uarr;</th><th>K-Jac&uarr;</th><th>K-Jdg&uarr;</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="group"><td colspan="9">Baseline models</td></tr>
+            <tr><td>GPT-5.1-Chat</td><td class="dim">&ndash;</td><td class="num">52.25</td><td class="num">7.48</td><td class="num">39.05</td><td class="num">44.03</td><td class="num">12.16</td><td class="num">7.87</td><td class="num">6.26</td></tr>
+            <tr><td>MiniMax-M2.5</td><td class="dim">&ndash;</td><td class="num">53.88</td><td class="num">7.86</td><td class="num">41.19</td><td class="num">47.19</td><td class="num">13.73</td><td class="num">8.75</td><td class="num">6.53</td></tr>
+            <tr><td>Qwen3-Max</td><td class="dim">&ndash;</td><td class="num">53.91</td><td class="num">7.33</td><td class="num">37.01</td><td class="num">36.56</td><td class="num">15.38</td><td class="num">10.83</td><td class="num">5.95</td></tr>
+            <tr><td>GLM-4-flash</td><td class="dim">&ndash;</td><td class="num">21.73</td><td class="num">3.04</td><td class="num">16.09</td><td class="num">19.95</td><td class="num">6.65</td><td class="num">3.98</td><td class="num">2.63</td></tr>
+            <tr><td>Kimi-k2-preview</td><td class="dim">&ndash;</td><td class="num">54.12</td><td class="num">7.75</td><td class="num">45.80</td><td class="num">55.30</td><td class="num">25.45</td><td class="num">16.42</td><td class="num">7.12</td></tr>
+            <tr><td>DeepSeek-V3</td><td>671B</td><td class="num">58.63</td><td class="num">7.88</td><td class="num">46.25</td><td class="num">49.18</td><td class="num">22.59</td><td class="num">15.13</td><td class="num">6.65</td></tr>
+            <tr><td>Qwen3.5-27B</td><td>27B</td><td class="num">50.55</td><td class="num">7.56</td><td class="num">40.99</td><td class="num">43.62</td><td class="num">16.73</td><td class="num">11.14</td><td class="num">6.33</td></tr>
+            <tr class="group"><td colspan="9">ReCite</td></tr>
+            <tr class="ours"><td>QueryPlanner (SFT)</td><td>4B</td><td class="num">56.12</td><td class="num">7.21</td><td class="num">37.74</td><td class="num">43.56</td><td class="num">16.87</td><td class="num">10.38</td><td class="num">5.93</td></tr>
+            <tr class="ours"><td>QueryPlanner (SFT + GRPO)</td><td>4B</td><td class="num best">57.81</td><td class="num">7.64</td><td class="num">39.06</td><td class="num">42.47</td><td class="num">17.85</td><td class="num">11.00</td><td class="num">6.44</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-note">
+        Reasoning R-F1: token-level F1 of the generated reasoning; R-Jdg / K-Jdg are LLM-as-a-judge scores. Keyword
+        metrics cover token F1 (K-F1), token recall (K-TR), phrase recall (K-PR), and Jaccard similarity (K-Jac).
+      </p>
+    </div>
+
+    <div class="tables-duo" style="margin-top:28px">
+      <div class="table-block">
+        <div class="table-caption"><span class="no">Table 6.</span> BUSCALDI out-of-domain benchmark</div>
+        <p class="table-explain">
+          On an unseen citation-location benchmark, CiteLocator generalizes beyond CS-specific rhetorical signals and
+          beats heuristic baselines on fine-grained placement.
+        </p>
+        <div class="table-scroll">
+          <table class="paper-table" style="min-width:100%">
+            <thead>
+              <tr><th>Type</th><th class="head-col">Method</th><th>P&uarr;</th><th>R&uarr;</th><th>F1&uarr;</th></tr>
+            </thead>
+            <tbody>
+              <tr class="group"><td colspan="5">Coarse-grained</td></tr>
+              <tr><td></td><td>Scientist</td><td class="num">76.2</td><td class="num">88.4</td><td class="num">81.8</td></tr>
+              <tr><td></td><td>GM-s2orc</td><td class="num">78.2</td><td class="num">78.2</td><td class="num">78.2</td></tr>
+              <tr><td></td><td>GM-s2orc-H</td><td class="num">80.2</td><td class="num">82.6</td><td class="num">81.4</td></tr>
+              <tr class="ours"><td></td><td>CiteLocator</td><td class="num">66.7</td><td class="num">87.0</td><td class="num">75.5</td></tr>
+              <tr class="group"><td colspan="5">Fine-grained</td></tr>
+              <tr><td></td><td>Scientist</td><td class="num">57.5</td><td class="num">66.6</td><td class="num">61.7</td></tr>
+              <tr><td></td><td>GM-s2orc</td><td class="num">44.9</td><td class="num">44.9</td><td class="num">44.9</td></tr>
+              <tr><td></td><td>GM-s2orc-H</td><td class="num">49.2</td><td class="num">50.7</td><td class="num">50.0</td></tr>
+              <tr class="ours"><td></td><td>CiteLocator</td><td class="num">46.7</td><td class="num best">60.9</td><td class="num best">52.8</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note">Values are percentages. &ldquo;-H&rdquo; indicates extra heuristic rules.</p>
+      </div>
+
+      <div class="table-block">
+        <div class="table-caption"><span class="no">Table 7.</span> Ablation of ReCite components</div>
+        <p class="table-explain">
+          Each module is individually replaced by the Qwen3-4B-Instruct baseline. Location perception is foundational;
+          intent-aware planning is indispensable; reflective verification mainly improves Lenient F1.
+        </p>
+        <div class="table-scroll">
+          <table class="paper-table" style="min-width:100%">
+            <thead>
+              <tr>
+                <th rowspan="2" class="head-col">Method</th>
+                <th colspan="3">Overall-Strictly</th>
+                <th colspan="3">Lenient Evaluation</th>
+              </tr>
+              <tr><th>P</th><th>R</th><th>F1</th><th>P</th><th>R</th><th>F1</th></tr>
+            </thead>
+            <tbody>
+              <tr class="ours"><td>ReCite</td><td class="num best">37.48</td><td class="num best">37.45</td><td class="num best">37.47</td><td class="num best">47.14</td><td class="num best">47.07</td><td class="num best">47.10</td></tr>
+              <tr><td>w/o CiteLocator</td><td class="num">2.98</td><td class="num">2.55</td><td class="num">2.75</td><td class="num">7.05</td><td class="num">6.02</td><td class="num">6.49</td></tr>
+              <tr><td>w/o QueryPlanner</td><td class="num">15.79</td><td class="num">15.75</td><td class="num">15.77</td><td class="num">30.88</td><td class="num">30.81</td><td class="num">30.85</td></tr>
+              <tr><td>w/o Master Brain</td><td class="num">36.92</td><td class="num">35.75</td><td class="num">36.33</td><td class="num">43.46</td><td class="num">42.08</td><td class="num">42.76</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="table-note">
+          Replaced modules use the Qwen3-4B-Instruct baseline. Removing CiteLocator or QueryPlanner causes severe drops;
+          removing Master Brain&rsquo;s reflective verification mainly hurts Lenient F1.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CITATION ================= -->
+<section class="section" id="citation">
+  <div class="container">
+    <div class="section-head"><p class="section-kicker">Citation</p></div>
+    <h2 class="section-title">BibTeX</h2>
+    <div class="bib-card">
+      <button class="copy-btn" id="bib-copy-btn" type="button">Copy</button>
+      <pre><code id="bib-content">@inproceedings{huang2026recite,
+  title     = {ReCite: Agentic Reasoning for Faithful Citation},
+  author    = {Huang, Yuyang and Li, Bobo and Song, Jiajia and Ding, Yuzhe
+               and Teng, Chong and Li, Fei and Ji, Donghong},
+  booktitle = {Findings of the Association for Computational Linguistics:
+               EMNLP 2026},
+  year      = {2026}
+}</code></pre>
+    </div>
+  </div>
+</section>
+
+<button class="to-top" id="to-top" type="button" aria-label="Back to top">
+  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+    <path d="M8 13V3M3.5 7.5 8 3l4.5 4.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-icons">
+      <a class="footer-icon" href="https://github.com/Hyy279/ReCite" target="_blank" rel="noopener"
+        aria-label="GitHub repository">
+        <svg width="17" height="17" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+          <path d="M8 0a8 8 0 0 0-2.53 15.59c.4.07.55-.17.55-.38l-.01-1.36c-2.23.48-2.7-1.07-2.7-1.07-.36-.92-.89-1.17-.89-1.17-.73-.5.05-.49.05-.49.8.06 1.23.83 1.23.83.72 1.23 1.88.87 2.34.67.07-.52.28-.87.51-1.07-1.78-.2-3.65-.89-3.65-3.97 0-.88.31-1.6.83-2.16-.08-.2-.36-1.02.08-2.12 0 0 .67-.22 2.2.82a7.6 7.6 0 0 1 4 0c1.52-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.28.82 2.16 0 3.09-1.87 3.77-3.66 3.96.29.25.55.74.55 1.49l-.01 2.21c0 .21.14.46.55.38A8 8 0 0 0 8 0Z"/>
+        </svg>
+      </a>
+      <a class="footer-icon" href="mailto:hyy279@whu.edu.cn" aria-label="Email Yuyang Huang">
+        <svg width="17" height="17" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <rect x="1.8" y="3" width="12.4" height="10" rx="2" stroke="currentColor" stroke-width="1.3"/>
+          <path d="m2.6 4.2 5.4 4.6 5.4-4.6" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </a>
+      <a class="footer-icon" href="ReCite.pdf" target="_blank" rel="noopener"
+        aria-label="Paper PDF">
+        <svg width="17" height="17" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+          <path d="M3 1.5h7l3 3v10H3v-13Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/>
+          <path d="M10 1.5v3h3M6 8h4M6 10.2h2.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/>
+        </svg>
+      </a>
+    </div>
+    <div class="footer-copy">&copy; 2026 ReCite Authors. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="assets/js/main.js"></script>
+</body>
+</html>
