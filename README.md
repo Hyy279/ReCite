@@ -55,8 +55,8 @@ The corpus is built from **10,893 LaTeX papers** at top CS venues (2024&ndash;20
 Training and evaluation data are provided under `Data/`.
 
 <div align="center">
-<img src="assets/figures/fig2.png" width="420" alt="Venue and intent distribution"/>
-<img src="assets/figures/fig3.png" width="76%" alt="Trajectory synthesis"/>
+<img src="assets/figures/fig2.png" width="360" alt="Venue and intent distribution"/>
+<img src="assets/figures/fig3.png" width="62%" alt="Trajectory synthesis"/>
 </div>
 
 ## Results
