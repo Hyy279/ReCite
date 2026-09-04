@@ -15,7 +15,7 @@ Yuyang Huang<sup>1</sup> &middot; <a href="https://www.libobo.site/" target="_bl
 </div>
 
 <p align="center">
-<img src="assets/figures/fig1.png" width="560" alt="ReCite overview"/>
+<img src="assets/figures/fig1.png" width="460" alt="ReCite overview"/>
 </p>
 
 ## Overview
