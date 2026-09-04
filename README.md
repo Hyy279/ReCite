@@ -8,7 +8,7 @@
 <a href="https://github.com/Hyy279/ReCite"><img src="https://img.shields.io/badge/Code-GitHub-black?style=flat-square&logo=github" alt="Code"/></a>
 <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="MIT License"/></a>
 
-Yuyang Huang<sup>1</sup> &middot; [Bobo Li](https://www.libobo.site/)<sup>2&ast;</sup> &middot; Jiajia Song<sup>2</sup> &middot; Yuzhe Ding<sup>1</sup> &middot; Chong Teng<sup>1</sup> &middot; Fei Li<sup>1</sup> &middot; Donghong Ji<sup>1&ast;</sup>
+Yuyang Huang<sup>1</sup> &middot; <a href="https://www.libobo.site/" target="_blank" rel="noopener">Bobo Li</a><sup>2&ast;</sup> &middot; Jiajia Song<sup>2</sup> &middot; Yuzhe Ding<sup>1</sup> &middot; Chong Teng<sup>1</sup> &middot; Fei Li<sup>1</sup> &middot; Donghong Ji<sup>1&ast;</sup>
 
 <sup>1</sup>Wuhan University &nbsp;&middot;&nbsp; <sup>2</sup>National University of Singapore
 
@@ -66,8 +66,9 @@ Training and evaluation data are provided under `Data/`.
 </div>
 
 <div align="center">
-<img src="assets/figures/fig6.png" width="420" alt="Cross-venue results"/>
-<img src="assets/figures/fig7.png" width="420" alt="Top-k sensitivity"/>
+<img src="assets/figures/fig6.png" width="46%" alt="Cross-venue results"/>
+&nbsp;
+<img src="assets/figures/fig7.png" width="46%" alt="Top-k sensitivity"/>
 </div>
 
 ## Setup
@@ -76,7 +77,7 @@ Training and evaluation data are provided under `Data/`.
 pip install -r requirements.txt
 ```
 
-Start the three OpenAI-compatible vLLM endpoints on ports 8001&ndash;8003 with your trained models, then run:
+Start the three OpenAI-compatible vLLM endpoints with your trained models, then run:
 
 ```bash
 python "Agent（Master Brain）/agent.py"
