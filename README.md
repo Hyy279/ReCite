@@ -1,7 +1,6 @@
 <div align="center">
 
-<h1>ReCite</h1>
-<p><em>Agentic Reasoning for Faithful Citation</em></p>
+<h1 style="font-size:2.2rem;font-weight:600;line-height:1.3">ReCite: Agentic Reasoning for Faithful Citation</h1>
 
 <a href="https://hyy279.github.io/ReCite/"><img src="https://img.shields.io/badge/Project-Page-blue?style=flat-square&logo=googlechrome&logoColor=white" alt="Project Page"/></a>
 <a href="ReCite.pdf"><img src="https://img.shields.io/badge/Paper-Findings%20of%20EMNLP%202026-red?style=flat-square" alt="Paper"/></a>
@@ -96,10 +95,8 @@ agent = CiteAgent(s2_api_keys=["key1", "key2"], device="cuda")
 ```bibtex
 @inproceedings{huang2026recite,
   title     = {ReCite: Agentic Reasoning for Faithful Citation},
-  author    = {Huang, Yuyang and Li, Bobo and Song, Jiajia and Ding, Yuzhe
-               and Teng, Chong and Li, Fei and Ji, Donghong},
-  booktitle = {Findings of the Association for Computational Linguistics:
-               EMNLP 2026},
+  author    = {Huang, Yuyang and Li, Bobo and Song, Jiajia and Ding, Yuzhe and Teng, Chong and Li, Fei and Ji, Donghong},
+  booktitle = {Findings of the Association for Computational Linguistics: EMNLP 2026},
   year      = {2026}
 }
 ```
