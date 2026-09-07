@@ -267,7 +267,7 @@ a:hover { color: var(--accent-2); text-decoration: underline; text-underline-off
   display: inline-flex;
   align-items: center;
   gap: 16px;
-  margin-bottom: 30px;
+  margin-bottom: 36px;
   font-size: 1.06rem;
   font-weight: 700;
   letter-spacing: 0.15em;
@@ -283,31 +283,19 @@ a:hover { color: var(--accent-2); text-decoration: underline; text-underline-off
 
 .hero h1 {
   font-family: var(--serif);
-  font-size: clamp(3.6rem, 8vw, 5.6rem);
-  line-height: 0.98;
+  font-size: clamp(1.7rem, 4vw, 2.9rem);
+  line-height: 1.25;
   font-weight: 600;
   letter-spacing: -0.04em;
   margin: 0;
-  background: linear-gradient(120deg, var(--ink) 0%, #334155 90%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-}
-
-.hero .subtitle {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 1.28rem;
-  color: var(--muted);
-  margin: 14px 0 8px;
+  color: var(--ink);
 }
 
 .hero-statement {
   font-size: 1rem;
   color: var(--body);
   max-width: 720px;
-  margin: 0 auto 34px;
+  margin: 24px auto 42px;
 }
 
 .hero-statement em {
@@ -318,7 +306,7 @@ a:hover { color: var(--accent-2); text-decoration: underline; text-underline-off
 .hero .authors {
   font-size: 1.05rem;
   color: var(--ink-2);
-  margin-bottom: 8px;
+  margin-bottom: 14px;
 }
 
 .hero .authors a {
@@ -335,8 +323,8 @@ a:hover { color: var(--accent-2); text-decoration: underline; text-underline-off
 }
 
 .hero .authors sup { color: var(--faint); font-size: 0.58em; }
-.hero .affiliation { color: var(--muted); font-size: 0.98rem; margin-bottom: 4px; }
-.hero .contact { color: var(--muted); font-size: 0.9rem; margin-bottom: 30px; }
+.hero .affiliation { color: var(--muted); font-size: 0.98rem; margin-bottom: 10px; }
+.hero .contact { color: var(--muted); font-size: 0.9rem; margin-bottom: 38px; }
 
 .hero-buttons {
   display: flex;
@@ -571,7 +559,9 @@ a:hover { color: var(--accent-2); text-decoration: underline; text-underline-off
 
 .motivation-figure {
   justify-self: center;
-  width: min(100%, 600px);
+  width: min(100%, 530px);
+  margin-top: 0;
+  transform: translateY(50px);
 }
 
 .motivation-figure img {
@@ -1298,12 +1288,13 @@ a:hover { color: var(--accent-2); text-decoration: underline; text-underline-off
 
 .bib-card {
   position: relative;
-  max-width: 860px;
+  width: 100%;
+  max-width: 100%;
   margin: 0 auto;
   background: var(--panel);
   border: 1px solid var(--line);
   border-radius: 16px;
-  padding: 30px 34px 30px 38px;
+  padding: 28px 28px 28px 30px;
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
@@ -1316,7 +1307,7 @@ a:hover { color: var(--accent-2); text-decoration: underline; text-underline-off
   margin: 0;
   overflow-x: auto;
   font-family: var(--mono);
-  font-size: 0.94rem;
+  font-size: 0.88rem;
   line-height: 1.8;
   color: #243044;
 }
@@ -1603,7 +1594,7 @@ a:hover { color: var(--accent-2); text-decoration: underline; text-underline-off
 @media (max-width: 620px) {
   .container { width: calc(100% - 32px); }
   .hero { padding: 84px 0 68px; }
-  .hero h1 { font-size: 3.2rem; }
+  .hero h1 { font-size: 1.7rem; }
   .section-title { font-size: 2rem; }
   .module-grid { grid-template-columns: 1fr; }
   .stat-grid { grid-template-columns: 1fr; }

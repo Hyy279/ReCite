@@ -82,7 +82,7 @@
   /* ---------- reveal on scroll ---------- */
   var revealTargets = Array.prototype.slice.call(
     document.querySelectorAll(
-      ".motivation-copy, .motivation-figure, .abstract-layout, " +
+      ".motivation-copy, .abstract-layout, " +
       ".module-grid, .stat-grid, .figure-slot, .insight-media, " +
       ".takeaway-note, .tables-duo, " +
       ".figure-row, .table-block"
