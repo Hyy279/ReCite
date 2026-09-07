@@ -267,11 +267,11 @@ a:hover { color: var(--accent-2); text-decoration: underline; text-underline-off
   display: inline-flex;
   align-items: center;
   gap: 16px;
-  margin-bottom: 36px;
-  font-size: 1.06rem;
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
+  margin-bottom: 42px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: none;
   color: var(--ink-2);
 }
 
@@ -287,26 +287,15 @@ a:hover { color: var(--accent-2); text-decoration: underline; text-underline-off
   line-height: 1.25;
   font-weight: 600;
   letter-spacing: -0.04em;
-  margin: 0;
+  margin: 0 0 28px;
   color: var(--ink);
 }
 
-.hero-statement {
-  font-size: 1rem;
-  color: var(--body);
-  max-width: 720px;
-  margin: 24px auto 42px;
-}
-
-.hero-statement em {
-  font-family: var(--serif);
-  color: var(--accent-2);
-}
-
 .hero .authors {
-  font-size: 1.05rem;
-  color: var(--ink-2);
-  margin-bottom: 14px;
+  font-size: 1.32rem;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 16px;
 }
 
 .hero .authors a {
@@ -322,9 +311,24 @@ a:hover { color: var(--accent-2); text-decoration: underline; text-underline-off
   text-decoration: none;
 }
 
-.hero .authors sup { color: var(--faint); font-size: 0.58em; }
-.hero .affiliation { color: var(--muted); font-size: 0.98rem; margin-bottom: 10px; }
-.hero .contact { color: var(--muted); font-size: 0.9rem; margin-bottom: 38px; }
+.hero .authors sup,
+.hero .affiliation sup { font-weight: 700; }
+.hero .authors sup { font-size: 0.64em; }
+.hero .affiliation {
+  color: var(--muted);
+  font-size: 1.12rem;
+  font-weight: 500;
+  margin-bottom: 12px;
+}
+.hero .affiliation sup { font-size: 0.72em; font-weight: 700; }
+.hero .contact {
+  color: var(--ink-2);
+  font-size: 1.06rem;
+  font-weight: 500;
+  margin-bottom: 40px;
+}
+.hero .contact a { color: var(--ink-2); }
+.hero .contact a:hover { color: var(--accent); text-decoration: none; }
 
 .hero-buttons {
   display: flex;
@@ -336,7 +340,6 @@ a:hover { color: var(--accent-2); text-decoration: underline; text-underline-off
 .hero .eyebrow,
 .hero h1,
 .hero .subtitle,
-.hero-statement,
 .hero .authors,
 .hero .affiliation,
 .hero .contact,
@@ -348,7 +351,6 @@ a:hover { color: var(--accent-2); text-decoration: underline; text-underline-off
 .hero .eyebrow { animation-delay: 0.05s; }
 .hero h1 { animation-delay: 0.14s; }
 .hero .subtitle { animation-delay: 0.22s; }
-.hero-statement { animation-delay: 0.26s; }
 .hero .authors { animation-delay: 0.32s; }
 .hero .affiliation { animation-delay: 0.38s; }
 .hero .contact { animation-delay: 0.44s; }
@@ -426,10 +428,10 @@ a:hover { color: var(--accent-2); text-decoration: underline; text-underline-off
 /* ============ section scaffolding ============ */
 .section-kicker {
   margin: 0 0 18px;
-  font-size: 1.08rem;
-  font-weight: 600;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
+  font-size: 1.18rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: none;
   color: var(--accent-2);
   display: flex;
   align-items: center;
@@ -454,7 +456,7 @@ a:hover { color: var(--accent-2); text-decoration: underline; text-underline-off
 
 #abstract .section-kicker {
   color: var(--accent-2);
-  font-size: 1.08rem;
+  font-size: 1.18rem;
   margin: 0 0 18px;
 }
 
@@ -511,7 +513,6 @@ a:hover { color: var(--accent-2); text-decoration: underline; text-underline-off
   .hero .eyebrow,
   .hero h1,
   .hero .subtitle,
-  .hero-statement,
   .hero .authors,
   .hero .affiliation,
   .hero .contact,

@@ -7,9 +7,13 @@
 <a href="https://github.com/Hyy279/ReCite"><img src="https://img.shields.io/badge/Code-GitHub-black?style=flat-square&logo=github" alt="Code"/></a>
 <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="MIT License"/></a>
 
-Yuyang Huang<sup>1</sup> &middot; <a href="https://www.libobo.site/" target="_blank" rel="noopener">Bobo Li</a><sup>2&ast;</sup> &middot; Jiajia Song<sup>2</sup> &middot; Yuzhe Ding<sup>1</sup> &middot; Chong Teng<sup>1</sup> &middot; Fei Li<sup>1</sup> &middot; Donghong Ji<sup>1&ast;</sup>
+<p style="font-size:1.22rem;font-weight:500;margin:0.9rem 0 0.25rem;color:#0e1726">
+Yuyang Huang<sup>1</sup>, <a href="https://www.libobo.site/" target="_blank" rel="noopener">Bobo Li</a><sup>2&ast;</sup>, Jiajia Song<sup>2</sup>, Yuzhe Ding<sup>1</sup>, Chong Teng<sup>1</sup>, Fei Li<sup>1</sup>, Donghong Ji<sup>1&ast;</sup>
+</p>
 
-<sup>1</sup>Wuhan University &nbsp;&middot;&nbsp; <sup>2</sup>National University of Singapore
+<p style="font-size:1.05rem;font-weight:500;color:#5b6b84">
+<sup>1</sup>Wuhan University &ensp;&ensp; <sup>2</sup>National University of Singapore
+</p>
 
 </div>
 
